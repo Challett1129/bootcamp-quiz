@@ -3,10 +3,10 @@ let timer = 60;
 
 //variable to append text into 
 const sectionEl = document.querySelector("#wrapper");
-const divEl = document.querySelector("#quiz");
+const quizContainerEl = document.querySelector("#quiz-container");
 const headerEl = document.querySelector("#header");
 const pageContentEl = document.querySelector("#page-content");
-
+const startBtn = document.querySelector("#start-btn");
 //array to hold all question objects 
 const quizQuestions = [ 
 {
@@ -32,46 +32,47 @@ const quizQuestions = [
 ];
 
 //start button to create the quiz 
-let quizHandler = () => {
-    const quizBioEl = document.createElement("div");
-    quizBioEl.className = "wrapper"; 
-    quizBioEl.textContent = "Are you ready to test your knowledge of all things javascript?"
+let quizHandler = (event) => {
+    //remove current text to display questions
+    let startStr = document.querySelector("#quiz");
+    startStr.remove();
+    startBtn.remove();
 
-    divEl.appendChild(quizBioEl);
+    //variable to tell what question to display
+    let currentQuestion = 0; 
 
-    const startBtnEl = document.createElement("button") 
-    startBtnEl.className = "wrapper btn"
-    startBtnEl.textContent = "Start"
 
-    divEl.appendChild(startBtnEl);
+    if(currentQuestion < quizQuestions.length) {
+        let quizQuestionEl = document.createElement("div");
+        quizQuestionEl.className = "quizForm"; 
+        quizQuestionEl.innerHTML = 
+        '<h1 class = "question" id = "question">' + quizQuestions[currentQuestion].question + '</h1>' + 
+        '<form id="quiz">' +
+        '<input type="radio" id="0" name="option" value="0">' +
+        '<label for="0">' + quizQuestions[currentQuestion].answers.a + '</label><br>' +
 
-    const highScoreEl = document.createElement("div");
-    highScoreEl.className = "header highScoreClick"; 
-    highScoreEl.textContent = "view high scores!";
+        '<input type="radio" id="1" name="option" value="1">' +
+        '<label for="1">' + quizQuestions[currentQuestion].answers.b + '</label><br>' +
 
-    headerEl.appendChild(highScoreEl);
+        '<input type="radio" id="2" name="option" value="2">' + 
+        '<label for="2">' + quizQuestions[currentQuestion].answers.c + '</label><br>' +
+
+        '<input type="radio" id="3" name="option" value="3">' + 
+        '<label for="3">' + quizQuestions[currentQuestion].answers.d + '</label><br>' +
+
+        '<p id="message"></p>' +
+
+        '</form>'
+
+        quizContainerEl.appendChild(quizQuestionEl);
+        
+    }
     
 
 }
 //create a function to create elements that display as a quiz on the page. Display questions as radio 
-const quizEl = () => {
-    for( i = 0; i < quizQuestions.length; i++) {
-        console.log("hello there");
-
-        
-    }
-
-    
-}
 
 //function to iterate through questions to send through quizEl
-const quiz = () => {
-
-    quizQuestions.forEach((currentQuestion, questionNum) => {
-        
-    })
-
-}
 
 //create timer countdown 
 function countdown() {
@@ -82,7 +83,7 @@ function countdown() {
 	}
 };
 
-setTimeout(countdown, 1000);
+countdown();
 
  //create submit button
 
@@ -91,6 +92,4 @@ setTimeout(countdown, 1000);
 //create function  to display high scores
 
 //create listen function to listen for click on submit
-pageContentEl.addEventListener('click', quizEl );
-quizHandler();
-quizEl();
+startBtn.addEventListener('click', quizHandler );
