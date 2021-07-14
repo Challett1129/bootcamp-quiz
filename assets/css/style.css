@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0; 
+}
+
+body {
+    display: flex; 
+    justify-content: center; 
+    flex-flow: column wrap;
+}
+
+.header {
+    display: flex; 
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 1rem;
+}
+
+.wrapper {
+    align-items: center; 
+    text-align: center; 
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+.quiz { 
+    width: 50%; 
+    margin: 400px auto;
+}
+
+.btn {
+    height: 50px;
+    width:100px;
+    font-size: 1rem;
+}
