@@ -2,81 +2,68 @@
 let timer = 60; 
 
 //variable to append text into 
-const sectionEl = document.querySelector("#wrapper");
 const quizContainerEl = document.querySelector("#quiz-container");
 const headerEl = document.querySelector("#header");
-const pageContentEl = document.querySelector("#page-content");
+const quizEl = document.querySelector("#quiz");
 const startBtn = document.querySelector("#start-btn");
+let currentQuestion; 
 //array to hold all question objects 
 const quizQuestions = [ 
 {
     question: 'select thisC',
-    answers: {
-        a: 'thisA',
-        b: 'thisB',
-        c: 'thisC',
-        d: 'thisD' 
-    },
-    correctAnswer: "c",
+    answers: [
+        {text: 'thisA', correct: false},
+        {text: 'thisB', correct: false},
+        {text: 'thisC', correct: true}, 
+        {text: 'thisD', correct: false},
+    ]
 },
 {
     question: 'select thisB',
-    answers: {
-        a: 'thisA',
-        b: 'thisB',
-        c: 'thisC',
-        d: 'thisD' 
-    },
-    correctAnswer: "b"
+    answers: [
+        {text: 'thisA', correct: false},
+        {text: 'thisB', correct: true},
+        {text: 'thisC', correct: false},
+        {text: 'thisD', correct: false}
+    ]
 }
 ];
 
 //start button to create the quiz 
-let quizHandler = (event) => {
-    //remove current text to display questions
-    let startStr = document.querySelector("#quiz");
-    startStr.remove();
-    startBtn.remove();
-
-    //variable to tell what question to display
+function nextQuestion () { 
     let currentQuestion = 0; 
+    questionElement(quizQuestions[currentQuestion]);
+    console.log(quizQuestions[currentQuestion])
+}
 
-    //main function which cycles through quiz
-    if(currentQuestion < quizQuestions.length) {
-        let quizQuestionEl = document.createElement("div");
-        quizQuestionEl.className = "quiz-form"; 
-        quizQuestionEl.innerHTML = 
-        '<h1 class = "question" id = "question">' + quizQuestions[currentQuestion].question + '</h1>' + 
-        '<form id="quiz">' +
-        '<input type="radio" id="0" name="option" value="0">' +
-        '<label for="0">' + quizQuestions[currentQuestion].answers.a + '</label><br>' +
+function questionElement(question) {
+    quizEl.innerText = question.question;
+    quizEl.classList.remove('hide');
 
-        '<input type="radio" id="1" name="option" value="1">' +
-        '<label for="1">' + quizQuestions[currentQuestion].answers.b + '</label><br>' +
-
-        '<input type="radio" id="2" name="option" value="2">' + 
-        '<label for="2">' + quizQuestions[currentQuestion].answers.c + '</label><br>' +
-
-        '<input type="radio" id="3" name="option" value="3">' + 
-        '<label for="3">' + quizQuestions[currentQuestion].answers.d + '</label><br>' +
-
-        '<p id="message"></p>' +
-
-        '</form>'
-
-        //add code to read user input in radio and display message if user is right or wrong
-        let rightAnswer = quizQuestions[currentQuestion].correctAnswer; 
-        console.log(rightAnswer);
-        if(document.querySelector('input[name=option]:checked')) {
-            console.log("correct!");
+    question.answers.forEach(answer => {
+        const buttonEl =document.createElement("button")
+        buttonEl.classList.add('btn')
+        if (answer.correct) {
+            buttonEl.dataset.correct 
         }
-
-        quizContainerEl.appendChild(quizQuestionEl);
-        
-    }
-    
+    })
 
 }
+
+
+let quiz = () => {
+    //remove current text to display questions
+    let startStr = document.querySelector("#quiz");
+    startStr.classList.add('hide');
+    startBtn.classList.add('hide');
+    nextQuestion();
+
+}
+
+    
+
+
+
 
 //create timer countdown 
 function countdown() {
@@ -96,4 +83,4 @@ countdown();
 //create function  to display high scores
 
 //create listen function to listen for click on submit
-startBtn.addEventListener('click', quizHandler );
+startBtn.addEventListener('click', quiz);
