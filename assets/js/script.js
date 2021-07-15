@@ -44,9 +44,14 @@ function questionElement(question) {
         const buttonEl =document.createElement("button")
         buttonEl.classList.add('btn')
         if (answer.correct) {
-            buttonEl.dataset.correct 
+            buttonEl.dataset.correct = answer.correct;
         }
+        buttonEl.addEventListener('click', userAnswer);
     })
+
+}
+
+function userAnswer(event) {
 
 }
 
