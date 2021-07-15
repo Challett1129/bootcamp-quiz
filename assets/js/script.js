@@ -37,7 +37,7 @@ let quizHandler = (event) => {
     let startStr = document.querySelector("#quiz");
     startStr.remove();
     startBtn.remove();
-
+    const output = []
     //variable to tell what question to display
     let currentQuestion = 0; 
 
@@ -48,16 +48,16 @@ let quizHandler = (event) => {
         quizQuestionEl.innerHTML = 
         '<h1 class = "question" id = "question">' + quizQuestions[currentQuestion].question + '</h1>' + 
         '<form id="quiz">' +
-        '<input type="radio" id="0" name="option" value="0">' +
+        '<input type="radio" id="0" name="option" value=' + answer.a + '>' +
         '<label for="0">' + quizQuestions[currentQuestion].answers.a + '</label><br>' +
 
-        '<input type="radio" id="1" name="option" value="1">' +
+        '<input type="radio" id="1" name="option" value=' +answer.b + '>' +
         '<label for="1">' + quizQuestions[currentQuestion].answers.b + '</label><br>' +
 
-        '<input type="radio" id="2" name="option" value="2">' + 
+        '<input type="radio" id="2" name="option" value="${answer.c}" >' + 
         '<label for="2">' + quizQuestions[currentQuestion].answers.c + '</label><br>' +
 
-        '<input type="radio" id="3" name="option" value="3">' + 
+        '<input type="radio" id="3" name="option" value="${answer.d}" >' + 
         '<label for="3">' + quizQuestions[currentQuestion].answers.d + '</label><br>' +
 
         '<p id="message"></p>' +
@@ -65,11 +65,7 @@ let quizHandler = (event) => {
         '</form>'
 
         //add code to read user input in radio and display message if user is right or wrong
-        let rightAnswer = quizQuestions[currentQuestion].correctAnswer; 
-        console.log(rightAnswer);
-        if(document.querySelector('input[name=option]:checked')) {
-            console.log("correct!");
-        }
+        
 
         quizContainerEl.appendChild(quizQuestionEl);
         
