@@ -37,7 +37,7 @@ let quizHandler = (event) => {
     let startStr = document.querySelector("#quiz");
     startStr.remove();
     startBtn.remove();
-    const output = []
+
     //variable to tell what question to display
     let currentQuestion = 0; 
 
@@ -48,31 +48,41 @@ let quizHandler = (event) => {
         quizQuestionEl.innerHTML = 
         '<h1 class = "question" id = "question">' + quizQuestions[currentQuestion].question + '</h1>' + 
         '<form id="quiz">' +
-        '<input type="radio" id="0" name="option" value=' + answer.a + '>' +
+        '<input type="radio" id="0" name="option" value="a">' +
         '<label for="0">' + quizQuestions[currentQuestion].answers.a + '</label><br>' +
 
-        '<input type="radio" id="1" name="option" value=' +answer.b + '>' +
+        '<input type="radio" id="1" name="option" value="b">' +
         '<label for="1">' + quizQuestions[currentQuestion].answers.b + '</label><br>' +
 
-        '<input type="radio" id="2" name="option" value="${answer.c}" >' + 
+        '<input type="radio" id="2" name="option" value="c">' + 
         '<label for="2">' + quizQuestions[currentQuestion].answers.c + '</label><br>' +
 
-        '<input type="radio" id="3" name="option" value="${answer.d}" >' + 
+        '<input type="radio" id="3" name="option" value="d">' + 
         '<label for="3">' + quizQuestions[currentQuestion].answers.d + '</label><br>' +
 
         '<p id="message"></p>' +
 
         '</form>'
+        
+        let answer = document.getElementsByName("option");
+        console.log(answer);
 
         //add code to read user input in radio and display message if user is right or wrong
-        
-
+        //.checked method to check what radio input is selected
+        //if .checked is correct display correct and go to next question else display incorrect and -10 seconds to timer, then next question
+        //at end of quiz create element prompt to submit initials then store high score 
+        //next screen displays all high-scores with an option to restart the quiz
         quizContainerEl.appendChild(quizQuestionEl);
+        }
+
+
+
         
-    }
+        
+}
     
 
-}
+
 
 //create timer countdown 
 function countdown() {
