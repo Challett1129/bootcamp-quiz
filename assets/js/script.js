@@ -41,10 +41,10 @@ let quizHandler = (event) => {
     //variable to tell what question to display
     let currentQuestion = 0; 
 
-
+    //main function which cycles through quiz
     if(currentQuestion < quizQuestions.length) {
         let quizQuestionEl = document.createElement("div");
-        quizQuestionEl.className = "quizForm"; 
+        quizQuestionEl.className = "quiz-form"; 
         quizQuestionEl.innerHTML = 
         '<h1 class = "question" id = "question">' + quizQuestions[currentQuestion].question + '</h1>' + 
         '<form id="quiz">' +
@@ -64,15 +64,19 @@ let quizHandler = (event) => {
 
         '</form>'
 
+        //add code to read user input in radio and display message if user is right or wrong
+        let rightAnswer = quizQuestions[currentQuestion].correctAnswer; 
+        console.log(rightAnswer);
+        if(document.querySelector('input[name=option]:checked')) {
+            console.log("correct!");
+        }
+
         quizContainerEl.appendChild(quizQuestionEl);
         
     }
     
 
 }
-//create a function to create elements that display as a quiz on the page. Display questions as radio 
-
-//function to iterate through questions to send through quizEl
 
 //create timer countdown 
 function countdown() {
