@@ -7,23 +7,30 @@
     <link  rel="stylesheet" href="./assets/css/style.css">
     <title>Quiz Time!</title>
 </head>
+
 <body id = "page-content">
     <div class = "header" id = "header"> 
         <div class = "header" id = "seconds">
             timer: 60
         </div> 
     </div>
-
    <section class = "wrapper" id = "wrapper"> 
        <div id = "quiz-container" class = "quiz">
            <div class = "quiz" id = "quiz">
             Are you ready to test your knowledge of all things javascript?
             <div>
-            <button class = "btn" id = "start-btn">Start</button>
+            <button class = "start-btn" id = "start-btn">Start</button>
             </div>
             </div>
         </div>
    </section>
+
+   <div class = "hide" id = "submit-initials"> 
+       <input type="text" placeholder="enter your initials">  
+       <button class="submit-btn" id="submit">Submit</button>
+   </div>
+   
    <script src="./assets/js/script.js"></script>
+
 </body>
 </html>
