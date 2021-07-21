@@ -41,7 +41,7 @@ let quizHandler = (event) => {
     let startStr = document.querySelector("#quiz");
     startStr.classList.add("hide");
     startBtn.classList.add("hide");
-    
+    countdown();
     createQuiz();
     
 }
@@ -107,7 +107,19 @@ createQuiz = function() {
 }
 
 highScore = function() {
+    const submit = document.querySelector("#submit-initials");
+    submit.classList.remove('hide');
 
+    localStorage.setItem("highscore", timer);
+    
+    var submitBtn = document.querySelector("#submit");
+    
+    submitBtn.addEventListener("onSubmit", function() {
+        let saveName = document.querySelector("#initials").value;
+        localStorage.setItem("userName", saveName);
+        console.log(saveName);
+    })
+    
 
 
 }
@@ -145,7 +157,7 @@ function countdown() {
     }
 };
 
-countdown();
+
 
  //create submit button
 
