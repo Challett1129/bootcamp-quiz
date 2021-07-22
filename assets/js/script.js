@@ -8,10 +8,10 @@ const submitBtn = document.querySelector("#submit");
 const submit = document.querySelector("#submit-initials");
 const hsScreen = document.querySelector("#hs-screen");
 const retryBtn = document.querySelector("#retry-btn");
+
 //array to hold all question objects 
-//high score array
 
-
+const getHighScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
 const quizQuestions = [ 
 {
@@ -126,24 +126,28 @@ createQuiz = function() {
 
 // }
 
-// saveHighScore = function() {
-//     console.log("save high score");
-//     quizContainerEl.classList.add('hide');
-//     submit.classList.remove('hide');    
+saveHighScore = function() {
+    quizContainerEl.classList.add('hide');
+    submit.classList.remove('hide');    
+    submitBtn.addEventListener("click", function() {
+        event.preventDefault();
+        const saveName = document.querySelector("#initials").value;  
+              if(saveName === "") {
+                  alert("You must enter a value");
+              }
+        const score = {
+            score: timer, 
+            name: saveName
+        };
+        getHighScores.push(score);
+        console.log(getHighScores);
 
-//     submitBtn.addEventListener("click", function() {
-//         let saveName = document.querySelector("#initials").value.trim();
-//         let highScoreArr = []
-//         if(localStorage.getItem("highScore")){
-//             highScoreArr = localStorage.getItem("highScore");
-//         }
-//         // console.log(typeof highScoreArr);
-//         let realArr = JSON.parse(highScoreArr);
-//         console.log(realArr);
-//         // realArr.push(saveName + "-" + timer);
-//         localStorage.setItem("highScore", JSON.stringify(realArr));
-//         scoreScreen(highScoreArr);
-//     })
+        getHighScores.sort( (a,b) => b.score - a.score)
+        getHighScores.splice(10);
+
+        localStorage.setItem('highScores',  JSON.stringify(getHighScores));
+    })
+}
     
 
 
@@ -166,6 +170,15 @@ createQuiz = function() {
 
 
 
+// function checkHighScore(score) {
+//     const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
+//     const lowestScore = highScores[highScoreLimit - 1]?.score ?? 0;
+    
+//     if (score > lowestScore) {
+//       saveHighScore(score, highScores); // TODO
+//       showHighScores(); // TODO
+//     }
+//   }
 
 //create timer countdown 
 function countdown() {
