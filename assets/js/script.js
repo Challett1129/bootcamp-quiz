@@ -1,15 +1,16 @@
 //variable to hold quiz timer
-let timer = 60; 
+let timer;
 
 //variable to append text into 
-const sectionEl = document.querySelector("#wrapper");
 const quizContainerEl = document.querySelector("#quiz-container");
-const headerEl = document.querySelector("#header");
-const pageContentEl = document.querySelector("#page-content");
 const startBtn = document.querySelector("#start-btn");
+const submitBtn = document.querySelector("#submit");
+const submit = document.querySelector("#submit-initials");
+const hsScreen = document.querySelector("#hs-screen");
+const retryBtn = document.querySelector("#retry-btn");
 //array to hold all question objects 
 //high score array
-const highScoreArr = []
+
 
 
 const quizQuestions = [ 
@@ -35,16 +36,18 @@ const quizQuestions = [
 }
 ];
 let currentQuestion = 0;    
+
 //start button to create the quiz 
 let quizHandler = (event) => {
-    //remove current text to display questions
-    let startStr = document.querySelector("#quiz");
-    startStr.classList.add("hide");
-    startBtn.classList.add("hide");
-    countdown();
+    // debugger;
+    currentQuestion = 0;
+    timer = 60;
     createQuiz();
+    countdown();
     
 }
+
+
 
 checkAnswer = function(event) {
     if(event.target.name === quizQuestions[currentQuestion].correctAnswer) {
@@ -61,6 +64,7 @@ checkAnswer = function(event) {
 createQuiz = function() {
     quizContainerEl.innerHTML = "";
     if(quizQuestions.length > currentQuestion) {  
+        quizContainerEl.classList.remove('hide');
 
         //creates the question 
         const questionEl = document.createElement("h3");
@@ -85,12 +89,7 @@ createQuiz = function() {
         const answerElD = document.createElement("button");
         answerElD.className = "btn";
         answerElD.name = "d";
-        answerElD.textContent = quizQuestions[currentQuestion].answers.d
-
-        // const answerLiA = document.createElement("li"); 
-        // const answerLiB = document.createElement("li");
-        // const answerLiC = document.createElement("li");
-        // const answerLiD = document.createElement("li");                     
+        answerElD.textContent = quizQuestions[currentQuestion].answers.d               
         
         const answerUlEl = document.createElement("ul")
         
@@ -106,41 +105,65 @@ createQuiz = function() {
 }
 }
 
-highScore = function() {
-    const submit = document.querySelector("#submit-initials");
-    submit.classList.remove('hide');
+// scoreScreen = function(realArr) {
+//     console.log("scoreScreen");
+//     console.log(highScoreArr);
+//     //hide previous screen
+//     submit.classList.add('hide');
+//     hsScreen.classList.remove('hide');
+//     const listedScoreEl = document.querySelector("#hs")
 
-    localStorage.setItem("highscore", timer);
+//     listedScoreEl.append(realArr);
+//     //sort array
     
-    var submitBtn = document.querySelector("#submit");
+//     //display high scores
+//     // highScoreArr.forEach( (score) => {
+//     // listedScore = document.createElement("li");
+//     // listedScore.textContent = score;
     
-    submitBtn.addEventListener("onSubmit", function() {
-        let saveName = document.querySelector("#initials").value;
-        localStorage.setItem("userName", saveName);
-        console.log(saveName);
-    })
+//     // listedScoreEl.appendChild(listedScore);    
+//     // })
+
+// }
+
+// saveHighScore = function() {
+//     console.log("save high score");
+//     quizContainerEl.classList.add('hide');
+//     submit.classList.remove('hide');    
+
+//     submitBtn.addEventListener("click", function() {
+//         let saveName = document.querySelector("#initials").value.trim();
+//         let highScoreArr = []
+//         if(localStorage.getItem("highScore")){
+//             highScoreArr = localStorage.getItem("highScore");
+//         }
+//         // console.log(typeof highScoreArr);
+//         let realArr = JSON.parse(highScoreArr);
+//         console.log(realArr);
+//         // realArr.push(saveName + "-" + timer);
+//         localStorage.setItem("highScore", JSON.stringify(realArr));
+//         scoreScreen(highScoreArr);
+//     })
     
 
 
-}
+// }
 
+// getHighScores = function() {
+//     let savedScores = []
+//     savedScores.push(localStorage.getItem("highScore"));
+//     console.log(savedScores);
+//     if(!savedScores) {
+//         console.log("false");
+//         return false; 
+//     }
+//     for(i = 0; i < savedScores.length; i++) {
+//     savedScores.push(highScoreArr[i]);
+//     }
+//     savedScores = localStorage.getItem("highScore");
+//     console.log(savedScores);
+// }
 
-
-
-
-
-        
-        
-
-
-
-        
-        
-
-
-
-
-    
 
 
 
@@ -150,10 +173,9 @@ function countdown() {
 	document.getElementById("seconds").innerHTML = String("Time: " + timer );
 	if (timer > 0 && currentQuestion  < quizQuestions.length) {
 		setTimeout(countdown, 1000);
-	}
-    else 
+	} else
     {
-        highScore();
+        saveHighScore();
     }
 };
 
@@ -167,3 +189,7 @@ function countdown() {
 
 //create listen function to listen for click on submit
 startBtn.addEventListener('click', quizHandler );
+retryBtn.addEventListener('click', function (){
+    hsScreen.classList.add('hide');
+    quizHandler();
+} );
