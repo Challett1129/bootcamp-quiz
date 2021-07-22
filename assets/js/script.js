@@ -35,6 +35,8 @@ const quizQuestions = [
     correctAnswer: "b"
 }
 ];
+
+
 let currentQuestion = 0;    
 
 //start button to create the quiz 
@@ -42,8 +44,8 @@ let quizHandler = (event) => {
     // debugger;
     currentQuestion = 0;
     timer = 60;
-    createQuiz();
     countdown();
+    createQuiz();
     
 }
 
@@ -105,26 +107,25 @@ createQuiz = function() {
 }
 }
 
-// scoreScreen = function(realArr) {
-//     console.log("scoreScreen");
-//     console.log(highScoreArr);
-//     //hide previous screen
-//     submit.classList.add('hide');
-//     hsScreen.classList.remove('hide');
-//     const listedScoreEl = document.querySelector("#hs")
+displayScores = function() {
+    //hide previous screen
+    submit.classList.add('hide');
+    hsScreen.classList.remove('hide');
+    const listedScoreEl = document.querySelector("#hs")
 
-//     listedScoreEl.append(realArr);
-//     //sort array
+    listedScoreEl.innerHTML = getHighScores.map( (score) => {
+        return `<li class="list">${score.name}-${score.score}</li>`; 
+    }).join("");
     
-//     //display high scores
-//     // highScoreArr.forEach( (score) => {
-//     // listedScore = document.createElement("li");
-//     // listedScore.textContent = score;
+    //display high scores
+    // highScoreArr.forEach( (score) => {
+    // listedScore = document.createElement("li");
+    // listedScore.textContent = score;
     
-//     // listedScoreEl.appendChild(listedScore);    
-//     // })
+    // listedScoreEl.appendChild(listedScore);    
+    // })
 
-// }
+}
 
 saveHighScore = function() {
     quizContainerEl.classList.add('hide');
@@ -134,51 +135,27 @@ saveHighScore = function() {
         const saveName = document.querySelector("#initials").value;  
               if(saveName === "") {
                   alert("You must enter a value");
+              } else
+              {
+                const score = {
+                    score: timer, 
+                    name: saveName
+                };
+                getHighScores.push(score);
+                //sore scores from highest to lowest
+                getHighScores.sort( (a,b) => b.score - a.score);
+                //keeps scores at a maximum of 10 
+                getHighScores.splice(10);
+                console.log(getHighScores);
+                //sends scores to local storage
+                localStorage.setItem('highScores',  JSON.stringify(getHighScores));
+                // debugger;
+                //executes to display scores screen
+                displayScores();
               }
-        const score = {
-            score: timer, 
-            name: saveName
-        };
-        getHighScores.push(score);
-        console.log(getHighScores);
-
-        getHighScores.sort( (a,b) => b.score - a.score)
-        getHighScores.splice(10);
-
-        localStorage.setItem('highScores',  JSON.stringify(getHighScores));
+              
     })
 }
-    
-
-
-// }
-
-// getHighScores = function() {
-//     let savedScores = []
-//     savedScores.push(localStorage.getItem("highScore"));
-//     console.log(savedScores);
-//     if(!savedScores) {
-//         console.log("false");
-//         return false; 
-//     }
-//     for(i = 0; i < savedScores.length; i++) {
-//     savedScores.push(highScoreArr[i]);
-//     }
-//     savedScores = localStorage.getItem("highScore");
-//     console.log(savedScores);
-// }
-
-
-
-// function checkHighScore(score) {
-//     const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
-//     const lowestScore = highScores[highScoreLimit - 1]?.score ?? 0;
-    
-//     if (score > lowestScore) {
-//       saveHighScore(score, highScores); // TODO
-//       showHighScores(); // TODO
-//     }
-//   }
 
 //create timer countdown 
 function countdown() {
@@ -192,17 +169,8 @@ function countdown() {
     }
 };
 
-
-
- //create submit button
-
-//function to save and store high scores
-
-//create function  to display high scores
-
 //create listen function to listen for click on submit
 startBtn.addEventListener('click', quizHandler );
 retryBtn.addEventListener('click', function (){
-    hsScreen.classList.add('hide');
-    quizHandler();
+    location.reload();
 } );
