@@ -8,7 +8,7 @@ const submitBtn = document.querySelector("#submit");
 const submit = document.querySelector("#submit-initials");
 const hsScreen = document.querySelector("#hs-screen");
 const retryBtn = document.querySelector("#retry-btn");
-
+const clearDataBtn = document.querySelector("#clear-data");
 //array to hold all question objects 
 
 const getHighScores = JSON.parse(localStorage.getItem("highScores")) || [];
@@ -174,3 +174,6 @@ startBtn.addEventListener('click', quizHandler );
 retryBtn.addEventListener('click', function (){
     location.reload();
 } );
+clearDataBtn.addEventListener('click', function() {
+    localStorage.clear('highScores');
+})
