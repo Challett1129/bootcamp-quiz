@@ -4,4 +4,5 @@ This quiz is designed to test your knowledge of javascript and see if you can be
 
 ### Deployed URL:https://challett1129.github.io/bootcamp-quiz
 
-![Bootcamp Quiz image](./Images/quiz.PNG)
+<img src="./assets/images/quiz.PNG"
+     alt="Image showing a start button for the quiz"/>
