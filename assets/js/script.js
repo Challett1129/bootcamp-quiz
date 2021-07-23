@@ -15,24 +15,44 @@ const getHighScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
 const quizQuestions = [ 
 {
-    question: 'select thisC',
+    question: 'What are boolean values?',
     answers: {
-        a: 'thisA',
-        b: 'thisB',
-        c: 'thisC',
-        d: 'thisD' 
+        a: 'Probably some kind of cheese',
+        b: 'WW2',
+        c: 'Values relating to true or false',
+        d: 'Node.js' 
     },
     correctAnswer: "c",
 },
 {
-    question: 'select thisB',
+    question: 'Strings are what kind of data type in JS?',
     answers: {
-        a: 'thisA',
-        b: 'thisB',
-        c: 'thisC',
-        d: 'thisD' 
+        a: 'String Cheese',
+        b: 'Primitive',
+        c: 'Undefined',
+        d: 'Objects' 
     },
-    correctAnswer: "b"
+    correctAnswer: "b",
+},
+{
+    question: 'What method pushes something into an array?',
+    answers: {
+        a: '.push()',
+        b: 'localStorage.setItem()',
+        c: '.cookies();',
+        d: '.splice()'
+    },
+    correctAnswer: "a",
+},
+{
+    question: 'Which of the following is a way to set a function',
+    answers: { 
+        a: '.setFunction()',
+        b: 'Please make this a function (that works)',
+        c: '=>',
+        d: '.undefined()',
+    },
+    correctAnswer: "c",
 }
 ];
 
@@ -132,7 +152,8 @@ saveHighScore = function() {
     submit.classList.remove('hide');    
     submitBtn.addEventListener("click", function() {
         event.preventDefault();
-        const saveName = document.querySelector("#initials").value;  
+        let saveName = document.querySelector("#initials").value;
+          saveName = saveName.toUpperCase();
               if(saveName === "") {
                   alert("You must enter a value");
               } else

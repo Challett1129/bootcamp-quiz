@@ -9,10 +9,18 @@ body {
     flex-flow: column wrap;
 }
 
+h3 {
+    font-size: 50px;
+}
+
+input {
+    padding: 5px;
+    height: 15px;
+}
 .header {
     display: flex; 
     justify-content:flex-end;
-    padding: 20px;
+    padding: 15px;
     font-size: 1rem;
 }
 
@@ -25,7 +33,7 @@ body {
 
 .quiz { 
     width: 50%; 
-    margin: 400px auto;
+    margin: 20px auto;
 }
 
 .btn {
@@ -45,4 +53,49 @@ body {
 
 .list:hover {
     color: blue;
+}
+
+.btn {
+    background-color: lightblue;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1rem;
+    height: 150px;
+    width: 50%;
+  } 
+
+.btn:hover {
+    background-color:lightseagreen;
+}
+
+.start-btn {
+    width: 25%;
+    height: 45px;
+    font-size: 1rem;
+    margin-top: 15px;
+    background-color:gold
+}
+
+.start-btn:hover {
+    background-color: lightblue;
+}
+
+.retry-btn, .reset-btn{
+    background-color: lightblue;
+    padding: 5px;
+    width: 10%;
+    height: 30px;
+}
+
+.retry-btn:hover, .reset-btn:hover, .submit-btn:hover {
+    background-color: lightseagreen;
+}
+
+.submit-btn {
+    background-color: lightblue;
+    padding: 5px;
+    width: 5%;
+    height: 30px;
 }
